@@ -5,7 +5,7 @@
 
 <div class="card uper">
     <div class="card-header" align='center'>
-        <h3> Register Customer Info</h3>
+        <h3> Create New Customer </h3>
     </div>
     </div>
   <div class="card-body">
@@ -42,12 +42,12 @@
           <input type="text" class="form-control" name="phone"  />
         </div>
          <div class="form-group">
-          <label for="address">phone :</label>
+          <label for="address">address :</label>
           <input type="address" class="form-control" name="address" />
         </div>
 
     
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Create Customer</button>
       </form>
   </div>
 </div>

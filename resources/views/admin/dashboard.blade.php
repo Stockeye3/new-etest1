@@ -76,15 +76,15 @@
                     @if($customer->ban)                 
 
                     <form method="post"
-                          action="/customer/{{$customer->id}}/unban">
+                          action="{{route('customer.unban',$customer->id)}}">
                         @method('PATCH')
                         {{ csrf_field() }}
-                        <button  class="btn btn-success" type="submit">Unban User </button>
+                        <button  class="btn btn-success" type="submit">Unban User</button>
 
                     </form>
                     @else
                     <form method="post"
-                          action="/customer/{{$customer->id}}/ban">
+                          action="{{route('customer.ban',$customer->id)}}">
                         @method('PATCH')
                         {{ csrf_field() }}
                         <button  class="btn btn-danger" type="submit">Ban User </button>
@@ -97,12 +97,14 @@
             @endforeach
 
 
-        </table>
 
+        </table>
         <hr>
         <div align='center'>
             <h3> Products' Table</h3>
-        </div>    
+        </div>
+
+        
 
         <table class='col-10' align='center'>
             <tr>
@@ -129,7 +131,8 @@
                 <td> {{ $product->price . " $"}} </td>
                 <td> <img class="pic-1" height="100" width="100" src={{$product->photo}} > </td>
                 <td> {{ $product->created_at->diffForHumans() }} </td>
-                <td> {{ $product->category_id }}</td>
+                
+                <td> {{ $product->getCatName($product) }}</td>
                 <?php
                 $product->visible ? $visibility = 'visible' : $visibility = 'hidden';
                 ?>
@@ -147,7 +150,52 @@
             </tr>
             @endforeach
 
+</table>
+ <a href="{{route('product.create')}}"><h3 align='center'> Add a New Product</h3></a>
+ <hr>
 
+
+
+        <div align='center'>
+            <h3> Categories' Table</h3>
+        </div>
+
+       <table class='col-5' align='center'>
+            <tr>
+                <th> Id </th> 
+                <th> Name </th> 
+                <th> status </th>
+                <th> Category Created </th>
+                <th> Edit Category </th>
+                <th> Delete Cat </th>
+            </tr>
+
+            @foreach($categories as $category)
+            <tr>
+                <td> {{ $category->id }} </td>
+                <td> {{ $category->name }} </td>
+                
+                <?php
+                $category->visible ? $cvisibility = 'visible' : $cvisibility = 'hidden';
+                ?>
+
+                <td> {{ $cvisibility }} </td>
+                <td> {{ $category->created_at->diffForHumans() }} </td>
+                <td>  <a href="{{ route('category.edit', $category->id)}}" class="btn btn-dark">Edit category</a>  </td>
+                <td>  <form action="{{ route('category.destroy', $category->id)}}" method="post"> 
+                        {{ csrf_field() }}
+                        @method('DELETE')
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
+                    </form>
+                </td>
+
+            </tr>
+            @endforeach
+
+            </table>
+            <a href="{{route('category.create')}}"><h3 align='center'> Create a New Category</h3></a>
+ <hr>
 
     </body>
 </html>      

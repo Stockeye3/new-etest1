@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Cart;
 use App\Product;
 use App\Category;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Redirect;
+use Session;
 class ProductController extends Controller
 {
     public function __construct() {
@@ -16,7 +17,7 @@ class ProductController extends Controller
         $categories = Category::all();
         $products = Product::all();
 
-        return view('products.index', compact('products','categories'));
+        return view('product.index', compact('products','categories'));
     }
 
     /**
@@ -24,64 +25,71 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+        $categories = Category::all();
+        return view('product.create',compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        $this->validate(request(), [
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'qty' => 'required',
+            'photo' => 'required',
+            'category_id' => 'required',
+            'visible' => 'required'
+        ]);
+
+        $product =  new Product(request(['name','description', 'price', 'qty', 'photo', 'category_id', 'visible']));
+        $product->save();
+        return redirect('/admin/dashboard');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
-    {
-        //
+    public function show($id) {
+        $product = Product::find($id);
+        return view ('product.show',compact('product'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        //
+    public function edit($id) {
+        $product = Product::find($id);
+        $categories = Category::all();
+        return view('product.edit', compact('product','categories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Product $product)
-    {
-        //
+    public function update(Request $request, $id) {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'qty' => 'required|integer',
+            'photo' => 'required',
+            'category_id' => 'required',
+            'visible' => 'required'
+        ]);
+
+        $product = Product::find($id);
+        $product->name = $request->get('name');
+        $product->description = $request->get('description');
+        $product->price = $request->get('price');
+        $product->qty = $request->get('qty');
+        $product->photo = $request->get('photo');
+        $product->category_id = $request->get('category_id');
+        $product->visible = $request->get('visible');
+        $product->save();
+
+        return redirect('/admin/dashboard');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Product $product)
-    {
-        //
+
+    public function destroy($id) {
+        $product = Product::find($id);
+        $product->delete();
+
+        return redirect('/admin/dashboard');
     }
+
+
+
+
 }

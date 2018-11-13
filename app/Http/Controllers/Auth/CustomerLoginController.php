@@ -5,12 +5,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use App\Customer;
 class customerLoginController extends Controller
 {
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-    }
+       }
  
     
     public function showLoginForm()
@@ -26,6 +27,12 @@ class customerLoginController extends Controller
         return Auth::guard('customer');
     }
     
+
+    // protected function restrictBanned(Request $request,Customer $customer){
+
+    //     if($customer->ban == 1)
+    //     return redirect('http://localhost/new-etest1/public/asdasd');
+    // }
     public function logout(Request $request)
     {
         

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@if(Auth::check())
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -74,4 +75,10 @@
         </div>
     </div>
 </div>
+@else
+<hr><hr><hr>
+<h1 align='center'>OoOoPs, you do not have priviliges for this page :(</h1>
+<h3 align='center'>Please check your URL, you're trying to access an Admin Page</h3>
+@endif
+
 @endsection

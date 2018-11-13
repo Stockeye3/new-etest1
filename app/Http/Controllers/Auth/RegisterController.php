@@ -37,7 +37,8 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest')->except('register','showRegistr');
+        $this->middleware('auth')->only('register','showRegistr');
     }
 
     /**
