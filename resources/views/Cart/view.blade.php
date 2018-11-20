@@ -90,7 +90,8 @@
                             <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
                         </button> </a>
                         </td>
-                        
+
+
                         <td>
                         <a href="{{route('checkout.view')}}" type="button" class="btn btn-success">
                             Checkout <span class="glyphicon glyphicon-play"></span>

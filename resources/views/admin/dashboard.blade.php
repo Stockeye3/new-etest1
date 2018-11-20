@@ -61,7 +61,7 @@
                 $customer->ban ? $status = 'banned' : $status = 'normal';
                 ?>
                 <td> {{ $status }} </td>
-                <td> <button class="btn btn-success" type="submit">View Orders</button> </td>
+                <td> <a href="{{route('customer.viewOrders',$customer)}}"><button class="btn btn-success" type="submit">View Orders</button></a></td>
 
                 <td> <a href="../customer/{{$customer->id}}/edit"
                         class="btn btn-dark" type="submit">Edit Info</a></td>

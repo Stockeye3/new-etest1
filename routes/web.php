@@ -31,6 +31,7 @@ Auth::routes();
     Route::get('/{customer}/edit','CustomerController@edit')->name('customer.edit');
     Route::patch('/{customer}/ban','CustomerController@ban')->name('customer.ban');
     Route::patch('/{customer}/unban','CustomerController@unban')->name('customer.unban');
+    Route::get('/{customer}/orders','OrderController@show')->name('customer.viewOrders');
 });
 Route::redirect('/customer/home', '/', 301);
 Route::redirect('/customer/home',  '/', 301);
@@ -51,3 +52,4 @@ Route::get('/add-to-cart/{id}', 'CartController@addToCart')->name('product.addto
 
 Route::get('/shopping-cart', 'CartController@showCart')->name('shoppingCart');
 Route::get('/checkout', 'CartController@showcheckout')->name('checkout.view');
+Route::post('/checkout', 'CartController@checkout')->name('checkout.submit');

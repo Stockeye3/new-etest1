@@ -13,11 +13,13 @@
 
         <div class="col-md-8 order-md-1">
           <h4 class="mb-3">Billing address</h4>
-          <form class="needs-validation" novalidate>
+          <form  class="needs-validation" novalidate 
+          method="post" action="{{route('checkout.submit')}}">
+          {{ csrf_field() }}
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label for="firstName">First name</label>
-                <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                <label for="fname">First name</label>
+                <input type="text" class="form-control" id="fname" value="{{$customer->fname}}" required>
                 <div class="invalid-feedback">
                   Valid first name is required.
                 </div>
@@ -25,8 +27,8 @@
               </div>
 
               <div class="col-md-6 mb-3">
-                <label for="lastName">Last name</label>
-                <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                <label for="lname">Last name</label>
+                <input type="text" class="form-control" id="lname"  value="{{$customer->lname}}" required>
                 <div class="invalid-feedback">
                   Valid last name is required.
                 </div>
@@ -36,16 +38,12 @@
 
             <div class="mb-3">
               <label for="address">Address</label>
-              <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+              <input type="text" class="form-control" id="address" value="{{$customer->address}}" required>
               <div class="invalid-feedback">
                 Please enter your shipping address.
               </div>
             </div>
 
-            <div class="mb-3">
-              <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-              <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
-            </div>
 
             <div class="row">
               <div class="col-md-5 mb-3">
@@ -68,7 +66,7 @@
 
                 </select>
                 <div class="invalid-feedback">
-                  Please provide a valid state.
+                  Please provide a valid City.
                 </div>
                 
               </div>
@@ -155,6 +153,6 @@
           });
         }, false);
       })();
-    </script>
+    </script>   
 
 @endsection
