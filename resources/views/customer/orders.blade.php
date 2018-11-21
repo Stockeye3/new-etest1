@@ -9,24 +9,46 @@
 
 <br>
 
-<h3> sorna hon </h3>
 
 
-@foreach($orders as $order)
-{{ $order['1']['id']}}
-
-<h5> {{'Order ID:' . $order->id}} </h5>
-
+@if(count($orders) == 0)
+<h3 align='center'> No Orders for this customer </h3>
+@else
 <table>
-<tr>
+    <tr>
+        <th> id </th>
+        <th> pdct </th>
+        <th> qty</th>
+    </tr>
 
-<th> Product </th>
-<th> Qty </th>
 
-</tr>
+
+    @foreach( $orders as $order => $i )
+    <br>
+        <tr>
+            <td>
+                {{'Order Id:' . $i[0]->order_id }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                 Product Id
+            </td>
+            <td>
+                    Qty
+            </td>
+
+
+        @foreach( $i as $row)
+            <tr>
+
+                <td> {{ $row->product_id}}
+                <td>{{ $row->qty}}
+            </tr>
+        @endforeach
+        
+    @endforeach
+
 </table>
-
-@endforeach
-
-
+@endif
 @endsection

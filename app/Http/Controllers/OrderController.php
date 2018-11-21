@@ -49,6 +49,11 @@ class OrderController extends Controller
 
         $orders_query = DB::table('orders')->where('customer_id', '=' ,$customer->id)->get();
 
+        if (count($orders_query) == 0 ) {
+            $orders = $orders_query ;
+            return view('customer.orders',compact ('customer','orders','products')); 
+        }
+
 
         $orders= array(array());
         $last_order =  DB::table('orders')->orderBy('created_at', 'desc')->first();
@@ -74,8 +79,9 @@ class OrderController extends Controller
             if ($currentOrder == $last_order)
             break;
         }
-
-        dd($orders);
+        // dd(array_dot($orders));
+        
+        // dd($orders);
         return view('customer.orders',compact ('customer','orders','products'));
 
     }
