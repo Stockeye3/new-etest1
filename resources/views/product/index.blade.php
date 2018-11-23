@@ -17,28 +17,21 @@
     <hr>
 
     
-    <?php
-    $i = 0;
+    @foreach ($categories as $category)
+        @if($category->visible)
+            <br>
+            <h3>{{$category->name}} </h3>
 
-    foreach ($categories as $category) {
-
-        if ($category->visible) {
-
-            echo('<h3> <u> Category: '. $category->name. '</u> </h3>');
-            $i++;
-
-            echo '<table>';
-            echo'<tr>';
-            foreach ($products as $product) {
-                if ($product->category_id == $i && $product->visible) {
-                ?>
-
-                    <td>
+            <table>
+                <tr>
+                    @foreach ($products as $product)
+                        @if ($product->category_id == $category->id && $product->visible)
+                     <td>
                         <div class="col-md-3 col-sm-8">
                             <div class="product-grid">
                                 <div class="product-image">
                                     <a href="#">
-                                    <img class="pic-1" height='200' width='200' src="{{$product->photo}}" >
+                                        <img class="pic-1" height='200' width='200' src="{{$product->photo}}" >
                                     </a>
 
 
@@ -57,17 +50,15 @@
                             </div>
                         </div>
                     </td>
-                    
-  
-                    <?php
-                
-            }
-            echo'</tr>';                
-            echo'</table>';
-        }
-        }
-    }
-    ?>
+                        @endif
+                    @endforeach
+
+                </tr>                
+                </table>
+
+        
+        @endif 
+    @endforeach
                    
 <hr>
 <hr>
