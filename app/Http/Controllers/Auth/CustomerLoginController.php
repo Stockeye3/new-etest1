@@ -5,12 +5,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use App\Customer;
 class customerLoginController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout','login');
+        //$this->middleware('customer')->only('login', 'logout');
        }
  
     
@@ -18,6 +20,25 @@ class customerLoginController extends Controller
     {
         return view('auth.customer-login');
     }
+
+    protected function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::guard('customer')->attempt($credentials)){
+
+            if (Auth::guard('customer')->user()->ban == 1){
+                Auth::guard('customer')->logout();
+                return redirect()->route('banned');
+            }
+
+            else 
+                return redirect()->route('home');
+
+        }
+
+    }
+
 
     public function showRegisterForm()
     {
@@ -28,11 +49,7 @@ class customerLoginController extends Controller
     }
     
 
-    // protected function restrictBanned(Request $request,Customer $customer){
 
-    //     if($customer->ban == 1)
-    //     return redirect('http://localhost/new-etest1/public/asdasd');
-    // }
     public function logout(Request $request)
     {
         
@@ -43,8 +60,6 @@ class customerLoginController extends Controller
         return redirect()->guest(route( 'home' ));
 
     }
-    use AuthenticatesUsers;
-
     protected $redirectTo = '/';
     /**
      * Create a new controller instance.

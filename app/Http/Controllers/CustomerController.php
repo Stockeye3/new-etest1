@@ -14,6 +14,9 @@ class CustomerController extends Controller
     public function index() {
 
     }
+    public function  showBanPage(){
+        return view('customer.banPage');
+    }
 
     public function create() {
         return view('customer.register');

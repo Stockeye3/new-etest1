@@ -2,7 +2,6 @@
 
 @section('title')
 @endsection
-
 @section('content')
 <body>
     <div id="app">

@@ -62,6 +62,9 @@
                                 </a>
                             </div>
                         </div>
+                        @if($errors->any())
+<h4>{{$errors->first()}}</h4>
+@endif
                     </form>
                 </div>
             </div>

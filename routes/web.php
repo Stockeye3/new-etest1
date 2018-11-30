@@ -35,6 +35,7 @@ Auth::routes();
 });
 Route::redirect('/customer/home', '/', 301);
 Route::redirect('/customer/home',  '/', 301);
+Route::get('/banned', 'CustomerController@showBanPage')->name('banned');
 //END CUSTOMER ROUTES
 
 

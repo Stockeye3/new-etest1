@@ -10,7 +10,6 @@
 <br>
 
 
-
 @if(count($orders) == 0)
 <h3 align='center'> No Orders for this customer </h3>
 @else
