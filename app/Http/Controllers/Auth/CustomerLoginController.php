@@ -30,6 +30,7 @@ class customerLoginController extends Controller
             if (Auth::guard('customer')->user()->ban == 1){
                 Auth::guard('customer')->logout();
                 return redirect()->route('banned');
+                header( "refresh:5;url=customer.login" );
             }
 
             else 
