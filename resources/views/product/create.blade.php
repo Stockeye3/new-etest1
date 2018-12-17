@@ -20,7 +20,7 @@
     @endif
 
 
-      <form method="post" action="{{route('product.store')}}">
+      <form method="post" action="{{route('product.store')}}" enctype="multipart/form-data">
         {{ csrf_field() }}
         
         <div class="form-group">
@@ -41,8 +41,8 @@
         </div>
 
           <div class="form-group">
-          <label for="photo">Photo link:</label>
-          <input type="text" class="form-control" name="photo" />
+          <label for="photo">Photo :</label>
+          <input type="file" class="form-control" name="photo" />
         </div>
 
 

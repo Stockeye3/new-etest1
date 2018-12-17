@@ -1,0 +1,44 @@
+
+
+
+*{
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: 13;
+}
+body{
+	background-color: #dfdfdf;
+}
+
+.h1,
+h1 {
+	color:red;
+	font-weight: 500;
+}
+
+.h3,
+h3 {
+	color:#e3342f;
+	font-weight: 500;
+}
+
+th {
+	color: #101010;
+	background-color:#9ebbd6;
+	text-align: center;
+	padding: 3px;
+}
+
+th.last {
+	border-top-right-radius: 10%;
+	
+}
+
+th.first{
+	border-top-left-radius: 30%; 
+}
+
+td{
+	text-align: center;
+	background-color:#d4e1ed;
+	color: #101010;
+}

@@ -18,7 +18,7 @@ class CustomerMiddleware
         }
 
             else {
-                dd(Auth::guard('customer')->user()->ban);
+
                 return Redirect::route('customer.login');
             }     
 

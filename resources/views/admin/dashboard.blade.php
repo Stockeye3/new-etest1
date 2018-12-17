@@ -1,41 +1,29 @@
+@extends('layouts.master')
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link href="public/css/mycss1.css" rel="stylesheet">
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-        <title> Admin's Dashboard </title>
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" />
-        <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+@section('custom_head')
+<link href="{{ asset('css/admin_dashboard.css') }}" rel="stylesheet" type="text/css" />
+@endsection
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    </head>
-    <body> 
+
+@section('title')
+<title> Admin's Dashbord </title>
+@endsection
+
 
         @include('layouts.header')
 
 
         <hr><hr><hr>
         <div align='center'>
-            <h1 > Admin {{Auth()->user()->name }}'s Dashbord </h1>
-            <h3> Users' Table </h3>
+            <h1> Admin {{Auth()->user()->name }}'s Dashbord </h1>
+            <h3> Users </h3>
         </div>
 
         <table class='col-10' align='center'>
             <tr>
-                <th> Id </th> 
+                <th class='first'> Id </th> 
                 <th> First Name </th> 
                 <th> Last Name </th>
                 <th> Email </th>            
@@ -101,14 +89,14 @@
         </table>
         <hr>
         <div align='center'>
-            <h3> Products' Table</h3>
+            <h3>Products</h3>
         </div>
 
         
 
         <table class='col-10' align='center'>
             <tr>
-                <th> Id </th> 
+                <th class='first'> Id </th> 
                 <th> Name </th> 
                 <th> Description </th>
                 <th> Qty </th>            
@@ -122,14 +110,14 @@
                 <th> Delete Product </th>
 
             </tr>
-            @foreach($products as $product)
+            @foreach($products as $product) 
             <tr>
                 <td> {{ $product->id }} </td>
                 <td> {{ $product->name }} </td>
                 <td> {{ $product->description }} </td>
                 <td> {{ $product->qty }} </td>
                 <td> {{ $product->price . " $"}} </td>
-                <td> <img class="pic-1" height="100" width="100" src={{$product->photo}} > </td>
+                <td> <img class="pic-1" height="100" width="100" src="{{url('uploads/'.$product->filename)}}" > </td>
                 <td> {{ $product->created_at->diffForHumans() }} </td>
                 
                 <td> {{ $product->getCatName($product) }}</td>
@@ -138,7 +126,7 @@
                 ?>
 
                 <td> {{ $visibility }} </td>
-                <td> <a href="{{ route('product.show', $product->id)}}" class="btn btn-dark">View Page</a></td>
+                <td> <a href="{{ route('product.show', $product->id)}}" class="btn btn-dark">View Product</a></td>
                 <td>  <a href="{{ route('product.edit', $product->id)}}" class="btn btn-dark">Edit Product</a>  </td>
                 <td>  <form action="{{ route('product.destroy', $product->id)}}" method="post"> 
                         {{ csrf_field() }}
@@ -151,13 +139,13 @@
             @endforeach
 
 </table>
- <a href="{{route('product.create')}}"><h3 align='center'> Add a New Product</h3></a>
+ <a href="{{route('product.create')}}"><h5 align='center'> Add a New Product</h4></a>
  <hr>
 
 
 
         <div align='center'>
-            <h3> Categories' Table</h3>
+            <h3> Categories</h3>
         </div>
 
        <table class='col-5' align='center'>
@@ -194,7 +182,7 @@
             @endforeach
 
             </table>
-            <a href="{{route('category.create')}}"><h3 align='center'> Create a New Category</h3></a>
+            <a href="{{route('category.create')}}"><h5 align='center'> Create a New Category</h3></a>
  <hr>
 
     </body>

@@ -47,6 +47,7 @@ Route::get('/profile', 'AdminController@showProfile')->name('admin.profile');
 });
 
 Route::resource('product','ProductController');
+Route::get('/product/{product}','ProductController@show')->name('product.show');
 Route::resource('category','CategoryController');
 
 Route::get('/add-to-cart/{id}', 'CartController@addToCart')->name('product.addtocart');

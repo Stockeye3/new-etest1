@@ -20,7 +20,9 @@ class CreateProductsTable extends Migration
             $table->string('description');
             $table->unsignedinteger('qty');
             $table->float('price');
-            $table->string('photo');
+            $table->string('filename')->nullable();
+            $table->string('mime')->nullable();
+            $table->string('original_filename')->nullable();
             $table->integer('category_id');
             $table->boolean('visible');
             $table->timestamps();

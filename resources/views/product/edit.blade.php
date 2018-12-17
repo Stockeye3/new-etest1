@@ -18,7 +18,7 @@
         </ul>
       </div><br />
     @endif
-    <form method="post" action="{{route('product.update', $product->id)}}">
+    <form method="post" action="{{route('product.update', $product->id)}}" enctype="multipart/form-data">
         @method('PATCH')
         {{ csrf_field() }}
         <div class="form-group">
@@ -56,8 +56,9 @@
         </select>
         </div>
         <div class="form-group">
-          <label for="photo">Photo Link:</label>
-          <input type="text" class="form-control" name="photo" value={{$product->photo}}  />    
+          <label for="photo">Photo:</label>
+          <img class="pic-1" height='200' width='200' src="{{url('uploads/'.$product->filename)}}" >
+          <input type="file" class="form-control" name="photo" />    
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
       </form>

@@ -30,20 +30,20 @@
                         <div class="col-md-3 col-sm-8">
                             <div class="product-grid">
                                 <div class="product-image">
-                                    <a href="#">
-                                        <img class="pic-1" height='200' width='200' src="{{$product->photo}}" >
+                                    <a href="{{route('product.show',$product)}}">
+                                        <img class="pic-1" height='200' width='200' src="{{url('uploads/'.$product->filename)}}" >
                                     </a>
 
 
                                 </div>
 
                                 <div class="product-content">
-                                    <h3 class="title"><a href="#">{{$product->name}}</a></h3>
+                                    <h3 class="title"><a href="{{route('product.show',$product)}}">{{$product->name}}</a></h3>
                                     <div class="price"> {{ $product->price  . ' $'}}    
                                     </div>
                                       
                                       <a href="{{ route('product.addtocart', ['id' => $product->id] ) }}"><i class="fa fa-shopping-cart"> Add</i></a>
-                                                
+                                            
                                 </div>
 
 
