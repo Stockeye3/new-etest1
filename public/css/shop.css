@@ -1,0 +1,38 @@
+
+
+body{
+
+    background-color:#dedede;
+}
+
+img.shop-image{
+
+    border-radius: 50%;
+    border:solid 2px black;
+}
+
+h3.category-name{
+
+    color: red;
+    font-size: 30px;
+    font-family: 'Times New Roman', Times, serif
+}
+
+h3.product-name{
+    color: black;
+    text-align: center;
+}
+
+div.product-grid{
+padding: 10%;
+border-right: 10%;
+text-align: center;
+}
+
+p.product-price{
+
+    color:black;
+    font-size: 17px;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+}

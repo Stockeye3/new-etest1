@@ -1,7 +1,12 @@
 @extends('layouts.master')
 
+
 @section('title')
 <title> All Products </title>
+@endsection
+
+@section('custom_head')
+<link href="{{ asset('css/shop.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')
@@ -20,37 +25,28 @@
     @foreach ($categories as $category)
         @if($category->visible)
             <br>
-            <h3>{{$category->name}} </h3>
-
+            <h3 class='category-name'>{{$category->name}} </h3>
             <table>
                 <tr>
                     @foreach ($products as $product)
                         @if ($product->category_id == $category->id && $product->visible)
                      <td>
-                        <div class="col-md-3 col-sm-8">
+
                             <div class="product-grid">
-                                <div class="product-image">
                                     <a href="{{route('product.show',$product)}}">
-                                        <img class="pic-1" height='200' width='200' src="{{url('uploads/'.$product->filename)}}" >
-                                    </a>
+                                        <img class="shop-image" height='170' width='170' src="{{url('uploads/'.$product->filename)}}" >
 
-
-                                </div>
-
-                                <div class="product-content">
-                                    <h3 class="title"><a href="{{route('product.show',$product)}}">{{$product->name}}</a></h3>
-                                    <div class="price"> {{ $product->price  . ' $'}}    
-                                    </div>
+                                    <h3 class="product-name" >{{$product->name}}</h3> </a>
+                                        <p class=product-price> {{'$ '. $product->price}} <p>
+                                
                                       
-                                      <a href="{{ route('product.addtocart', ['id' => $product->id] ) }}"><i class="fa fa-shopping-cart"> Add</i></a>
-                                            
-                                </div>
-
+                                      <a href="{{ route('product.addtocart', ['id' => $product->id] ) }}"><i class="fa fa-shopping-cart"> Add To Cart</i></a>
 
                             </div>
-                        </div>
+
                     </td>
                         @endif
+
                     @endforeach
 
                 </tr>                
@@ -58,10 +54,9 @@
 
         
         @endif 
+        <hr>
     @endforeach
-                   
-<hr>
-<hr>
+
 
 @endsection
 

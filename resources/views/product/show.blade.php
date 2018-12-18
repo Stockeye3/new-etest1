@@ -10,7 +10,7 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-4 item-photo">
-            <img  src="{{$product->photo}}" />
+            <img  src="{{url('uploads/'.$product->filename)}}" />
         </div>
         <div class="col-5" style="border:0px solid gray">
            
