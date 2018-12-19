@@ -42,3 +42,8 @@ td{
 	background-color:#d4e1ed;
 	color: #101010;
 }
+
+img.product {
+
+	border-radius: 10%;
+}

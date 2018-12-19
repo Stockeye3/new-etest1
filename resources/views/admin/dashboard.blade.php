@@ -117,7 +117,7 @@
                 <td> {{ $product->description }} </td>
                 <td> {{ $product->qty }} </td>
                 <td> {{ $product->price . " $"}} </td>
-                <td> <img class="pic-1" height="100" width="100" src="{{url('uploads/'.$product->filename)}}" > </td>
+                <td> <img class="product" height="100" width="100" src="{{url('uploads/'.$product->filename)}}" > </td>
                 <td> {{ $product->created_at->diffForHumans() }} </td>
                 
                 <td> {{ $product->getCatName($product) }}</td>

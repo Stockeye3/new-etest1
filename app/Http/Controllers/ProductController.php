@@ -83,19 +83,22 @@ class ProductController extends Controller
             'category_id' => 'required',
             'visible' => 'required'
         ]);
-
-        $cover = $request->file('photo');
-        $extension = $cover->getClientOriginalExtension();
-        Storage::disk('public')->put($cover->getFilename().'.'.$extension,  File::get($cover));
-
         $product = Product::find($id);
+
+        if ($request->hasFile('photo')) {
+            $cover = $request->file('photo');
+            $extension = $cover->getClientOriginalExtension();
+            Storage::disk('public')->put($cover->getFilename().'.'.$extension,  File::get($cover));
+            $product->mime = $cover->getClientMimeType();
+            $product->original_filename = $cover->getClientOriginalName();
+            $product->filename = $cover->getFilename().'.'.$extension;
+        }
+        
         $product->name = $request->get('name');
         $product->description = $request->get('description');
         $product->price = $request->get('price');
         $product->qty = $request->get('qty');
-        $product->mime = $cover->getClientMimeType();
-        $product->original_filename = $cover->getClientOriginalName();
-        $product->filename = $cover->getFilename().'.'.$extension;
+        
         $product->category_id = $request->get('category_id');
         $product->visible = $request->get('visible');
         $product->save();

@@ -32,7 +32,6 @@
             </a>
             </li>
           
-            <li class="nav-item">  <i class="fa fa-shopping-cart"> </i></a> </li>
 
                <li class="nav-item">
             <a class="nav-link" href="#"> |
