@@ -23,10 +23,13 @@ class CreateProductsTable extends Migration
             $table->string('filename')->nullable();
             $table->string('mime')->nullable();
             $table->string('original_filename')->nullable();
-            $table->integer('category_id');
+            $table->integer('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->boolean('visible');
             $table->timestamps();
+            
         });
+
     }
 
     /**

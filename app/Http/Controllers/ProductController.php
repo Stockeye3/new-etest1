@@ -16,9 +16,26 @@ class ProductController extends Controller
     }
     public function index()
     {
-        $categories = Category::all();
-        $products = Product::all();        
-        return view('product.index', compact('products','categories','i'));
+        $categories = Category::with(['products' => function ($query) {
+                 $query->where('visible', '=', '1');
+             }])->get();
+        
+             
+        // $cat1 = $categories[0];
+        // $prod1 = $cat1->products()->get();
+        // dd($prod1);
+        // dd($cat1);
+        // dd($categories);
+
+
+        // $categories = Category::whereHas('products', function ($query) {
+        //     $query->where('visible', '=', '1');
+        // })->get();
+
+        
+        dd($categories);
+        
+        return view('product.index', compact('categories'));
     }
 
     /**
@@ -63,8 +80,7 @@ class ProductController extends Controller
         return redirect('/admin/dashboard');
     }
 
-    public function show($id) {
-        $product = Product::find($id);
+    public function show(Product $product) {
         return view ('product.show',compact('product'));
     }
 

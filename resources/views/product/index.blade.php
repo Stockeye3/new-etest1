@@ -22,30 +22,28 @@
     <hr>
 
     
-    @foreach ($categories as $category)
-        @if($category->visible)
+    @foreach ($categories as $category => $products)
+
             <br>
-            <h3 class='category-name'>{{$category->name}} </h3>
+            <h3 class='category-name'>{{$category['name']}} </h3>
             <table>
+
                 <tr>
                     @foreach ($products as $product)
-                        @if ($product->category_id == $category->id && $product->visible)
                      <td>
-
                             <div class="product-grid">
                                     <a href="{{route('product.show',$product)}}">
-                                        <img class="shop-image" height='170' width='170' src="{{url('uploads/'.$product->filename)}}" >
+                                        <img class="shop-image" height='170' width='170' src="{{url('uploads/'.$product['filename'])}}" >
 
-                                    <h3 class="product-name" >{{$product->name}}</h3> </a>
-                                        <p class=product-price> {{'$ '. $product->price}} <p>
+                                    <h3 class="product-name" >{{$product['name']}}</h3> </a>
+                                        <p class=product-price> {{'$ '. $product['price']}} <p>
                                 
                                       
-                                      <a href="{{ route('product.addtocart', ['id' => $product->id] ) }}"><i class="fa fa-shopping-cart"> Add To Cart</i></a>
+                                      <a href="{{ route('product.addtocart', ['id' => $product['id']] ) }}"><i class="fa fa-shopping-cart"> Add To Cart</i></a>
 
                             </div>
 
                     </td>
-                        @endif
 
                     @endforeach
 
@@ -53,7 +51,7 @@
                 </table>
 
         
-        @endif 
+
         <hr>
         
     @endforeach
