@@ -20,7 +20,7 @@ class Cart
             $this->totalPrice = $oldCart->totalPrice;
 
         }
-    }
+    } 
 
         public function add($item, $id){
 

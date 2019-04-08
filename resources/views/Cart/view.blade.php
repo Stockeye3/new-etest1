@@ -31,24 +31,29 @@
                 </thead>
                 <tbody>
                 @foreach($products as $product)
+                <form method="post" action="{{route('cart.update')}}">
+        @method('PATCH')
+        {{ csrf_field() }}
                     <tr>
                         <td class="col-sm-8 col-md-6">
                         <div class="media">
-                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="{{$product['item']['photo'] }}" style="width: 72px; height: 72px;"> </a>
+                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="{{url('uploads/'.$product['item']['filename']) }}" style="width: 72px; height: 72px;"> </a>
                             <div class="media-body">
                                 <h4 class="media-heading">{{$product['item']['name'] }} <a href="#"></a></h4>
-                                <h5 class="media-heading"> {{ $product['item']->getCatName($product['item']) }} <a href="#"> </a></h5>
-                            
+                                                         
                             </div>
                         </div></td>
                         <td class="col-sm-1 col-md-1" style="text-align: center">
-                        <input type="email" class="form-control" id="exampleInputEmail1" value="{{$product['qty']}}">
+                            <input type="text" class="form-control" name="{{$product['item']['id']}}" value="{{$product['qty']}}">
                         </td>
+
                         <td class="col-sm-1 col-md-1 text-center"><strong>{{$product['item']['price']}}</strong></td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>{{$product['price']}}</strong></td>
                         <td class="col-sm-1 col-md-1">
-                        <button type="button" class="btn btn-danger">
+                        <button type="submit" class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove"></span> Remove
+
+                            
                         </button></td>
                     </tr>
                     @endforeach
@@ -76,9 +81,8 @@
                     <tr>
                         <td>   </td>
                         <td>
-                        <button type="button" class="btn btn-info">
-                            Update Cart <span class="glyphicon glyphicon-play"></span>
-                        </button>
+                        <button type="submit" class="btn btn-info">Update</button>
+                        </form>
                         </td>
 
                         <td>                           

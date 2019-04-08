@@ -17,3 +17,23 @@ background-color: red;
 color: white;
 
 }
+
+label.in-stock
+
+{
+
+
+	font-weight: 400;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle; 
+	border: 1px solid transparent;
+	padding: .375rem .75rem;
+	font-size: .9rem;
+	line-height: 1.6;
+	border-radius: .25rem;
+background-color: lightgreen;
+
+color: black;
+
+}

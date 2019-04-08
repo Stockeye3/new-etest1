@@ -28,17 +28,16 @@
             <div class="section">
                 <h6 class="title-attr" style="margin-top:15px;" >
             </div>
- 
-            <div class="section" style="padding-bottom:20px;">
-                <h6 class="title-attr"><small>Quantity</small></h6>                    
-                <div>
-
-                Stock: {{$product->qty}} pieces left  
-            </div>                
+                   
+          
 
            @if ( $product->qty > 0 ) 
+           <div>
+
+<label class="in-stock"> {{$product->qty}} pieces left  </label> 
+</div>      
             <div class="section" style="padding-bottom:20px;">
-            <a href="{{ route('product.addtocart', ['id' => $product->id] ) }}">
+            <a href="{{ route('product.addtocart', $product) }}">
                 <button class="btn btn-success"><i class="fa fa-shopping-cart"> Add To Cart</i></a></button>
                 
             </div>

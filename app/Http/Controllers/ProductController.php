@@ -12,7 +12,7 @@ use Session;
 class ProductController extends Controller
 {
     public function __construct() {
-        $this->middleware('auth')->except('index','show');
+        $this->middleware('auth')->except('index','show','test');
     }
     public function index()
     {
@@ -33,9 +33,14 @@ class ProductController extends Controller
         // })->get();
 
         
-        dd($categories);
+        //dd($categories);
         
         return view('product.index', compact('categories'));
+    }
+
+
+    public function test() {
+        return view('layouts.test');
     }
 
     /**

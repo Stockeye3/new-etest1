@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 Route::get('/', 'ProductController@index')->name('home');
 Auth::routes();
 
@@ -50,8 +46,17 @@ Route::resource('product','ProductController');
 Route::get('/product/{product}','ProductController@show')->name('product.show');
 Route::resource('category','CategoryController');
 
-Route::get('/add-to-cart/{id}', 'CartController@addToCart')->name('product.addtocart');
+Route::get('/add-to-cart/{product}', 'CartController@addToCart')->name('product.addtocart');
 
 Route::get('/shopping-cart', 'CartController@showCart')->name('shoppingCart');
+Route::patch('/shopping-cart', 'CartController@update')->name('cart.update');
 Route::get('/checkout', 'CartController@showcheckout')->name('checkout.view');
 Route::post('/checkout', 'CartController@checkout')->name('checkout.submit');
+Route::get('/test','ProductController@test')->name('test.show');
+
+
+//ticket Routes
+
+Route::get('/create-ticket', 'TicketsController@create');
+Route::post('/create-ticket', 'TicketsController@store');
+

@@ -21,14 +21,11 @@ public function getOrderId()
     
  }
 
+public function addToCart(Request $request, Product $product){
 
-
-        public function addToCart(Request $request, $id){
-
-        $product = Product::find($id);
         $oldCart = Session::has('cart') ? Session::get('cart') :null;
 
-        $cart = new Cart($oldCart);
+         $cart = new Cart($oldCart);
         $cart->add($product, $product->id);
 
         $request->session()->put('cart', $cart);
@@ -45,8 +42,38 @@ public function getOrderId()
         $cart = new Cart($oldCart);
         $products= $cart->items;
         $totalPrice = $cart->totalPrice;
-        $categories = Category::all();
-        return view ('cart.view', compact ('products', 'totalPrice', 'categories'));
+        return view ('cart.view', compact ('products', 'totalPrice'));
+
+    }
+
+    public function update(Request $request){
+
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        $products= $cart->items;
+        $totalPrice = $cart->totalPrice;
+        $totalqty = $cart->totalQty;
+        $totalPrice = 0;
+        $totalqty =0;
+
+        foreach($products as $id => $product){
+
+        $products[$id]['qty'] = $request->get($product['item']['id']);
+
+        if ($products[$id]['qty'] == 0 )
+                unset($products[$id]);
+        else {
+            $totalPrice += ($products[$id]['qty'] *  $products[$id]['price'] );
+            $totalqty += $products[$id]['qty'];
+        }   
+           
+    }
+        $cart->items = $products;
+        $cart->totalQty = $totalqty;
+        $cart->totalPrice = $totalPrice;
+        $request->session()->put('cart', $cart);
+
+        return view ('cart.view', compact ('products', 'totalPrice'));
 
     }
 
