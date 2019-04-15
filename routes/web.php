@@ -1,6 +1,5 @@
 <?php
 
-Route::get('/', 'ProductController@index')->name('home');
 Auth::routes();
 
 
@@ -29,7 +28,6 @@ Auth::routes();
     Route::patch('/{customer}/unban','CustomerController@unban')->name('customer.unban');
     Route::get('/{customer}/orders','OrderController@show')->name('customer.viewOrders');
 });
-Route::redirect('/customer/home', '/', 301);
 Route::redirect('/customer/home',  '/', 301);
 Route::get('/banned', 'CustomerController@showBanPage')->name('banned');
 //END CUSTOMER ROUTES
@@ -43,7 +41,6 @@ Route::get('/profile', 'AdminController@showProfile')->name('admin.profile');
 });
 
 Route::resource('product','ProductController');
-Route::get('/product/{product}','ProductController@show')->name('product.show');
 Route::resource('category','CategoryController');
 
 Route::get('/add-to-cart/{product}', 'CartController@addToCart')->name('product.addtocart');
