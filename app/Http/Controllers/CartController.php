@@ -116,6 +116,7 @@ public function addToCart(Request $request, Product $product){
         $qty = $cproduct['qty'];
         $product = Product::find($id);
         $product->qty = $product->qty - $qty;
+        $product->save();
  
         $order = new Order();
         $order->order_id = $nextOrderId;
@@ -124,11 +125,9 @@ public function addToCart(Request $request, Product $product){
         $order->qty = $qty;
         $order->save();
         }
-        dd($order);
-        if (Auth::guard('customer')->check()) { 
+
         $id = Auth::guard('customer')->user()->id;
-       
-        } 
+
 
 
     }

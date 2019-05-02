@@ -2,10 +2,7 @@
 
 Auth::routes();
 
-
-
-
-
+    
 // Route::resource('customer', 'customerController')->only([
 //    'show', 'create', 'store', 'update', 'destroy', 'ban', 'unban', 'edit'
 // ]);
